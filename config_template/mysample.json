@@ -103,6 +103,7 @@
     {
       "tag":"proxy",
       "type":"selector",
+      "default":"auto",
       "outbounds":[
         "auto",
         "{all}"
@@ -112,6 +113,7 @@
       "tag":"🌏 !cn",
       "type":"selector",
       "outbounds":[
+        "auto",
         "{all}",
         "direct"
       ]
@@ -123,7 +125,7 @@
         "{all}"
       ],
       "url": "http://www.gstatic.com/generate_204",
-      "interval": "1m",
+      "interval": "5m",
       "tolerance": 50
     },
     {
@@ -155,11 +157,7 @@
         "protocol": "dns",
         "outbound": "dns-out"
       },
-      {
-        "network": "udp",
-        "port": 443,
-        "outbound": "block"
-      },
+      
       {
         "geosite": "category-ads-all",
         "outbound": "block"
