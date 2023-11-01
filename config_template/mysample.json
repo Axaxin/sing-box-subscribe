@@ -105,7 +105,6 @@
       "type":"selector",
       "outbounds":[
         "auto",
-        "direct",
         "{all}"
       ]
     },
@@ -113,8 +112,8 @@
       "tag":"🌏 !cn",
       "type":"selector",
       "outbounds":[
-        "direct",
-        "{all}"
+        "{all}",
+        "direct"
       ]
     },
     {
