@@ -114,8 +114,8 @@
       "type":"selector",
       "outbounds":[
         "auto",
-        "{all}",
-        "direct"
+        "direct",
+        "{all}"
       ]
     },
     {
@@ -146,11 +146,11 @@
     "final": "proxy",
     "geoip": {
       "download_url": "https://ghproxy.com/github.com/SagerNet/sing-geoip/releases/latest/download/geoip.db",
-      "download_detour": "direct"
+      "download_detour": "proxy"
     },
     "geosite": {
       "download_url": "https://ghproxy.com/github.com/SagerNet/sing-geosite/releases/latest/download/geosite.db",
-      "download_detour": "direct"
+      "download_detour": "proxy"
     },
     "rules": [
       {
