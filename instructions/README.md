@@ -28,7 +28,15 @@ The above example shows: enable emoji, add ♥ before the node name, use v2rayng
 
 Example: https://sing-box-subscribe.vercel.app/config/https://gist.githubusercontent.com/Toperlock/b1ca381c32820e8c79669cbbd85b68ac/raw/dafae92fbe48ff36dae6e5172caa1cfd7914cda4/gistfile1.txt/&file=https://github.com/Toperlock/sing-box-subscribe/raw/main/config_template/config_template_groups_tun.json
 
-2023.11.04 Update: Two sub links can be processed, the format is: `/config/URL_LINK_1|URL_LINK_2`, `emoji`, `tag`, `prefix`, `UA`, `file` parameters cannot be written
+2023.11.04 Update: Two sub links can be processed, the format is: `/config/URL encoding`, `emoji`, `tag`, `prefix`, `UA`, `file` parameters cannot be written
+
+Use `|` to connect the two sub links and then [URL encode](https://www.urlencoder.org/) and put them after `config/`, as shown in the figure:
+
+<div align="left">
+  <img src="https://github.com/Toperlock/sing-box-subscribe/assets/86833913/5ed8e9de-3296-4dfc-ad65-2e181017829e" alt="how-to-use" width="50%" />
+</div>
+
+Example: https://sing-box-subscribe.vercel.app/config/https%3A%2F%2Fgist.githubusercontent.com%2FToperlock%2Fb1ca381c32820e8c79669cbbd85b68ac%2Fraw%2Fdafae92fbe48ff36dae6e5172caa1cfd7914cda4%2Fgistfile1.txt%7Chttps%3A%2F%2Fgist.githubusercontent.com%2FToperlock%2Ffa2fdc5f827ff7d288c23d568db75412%2Fraw%2F6c3b725da347f57b0021b806dfca5f51e1660746%2F1.yaml
 
 ### Demo video
 
@@ -205,7 +213,7 @@ In this file, you can add subscription links and basic settings.
     },
     "save_config_path": "./config.json",
     "auto_backup": false,
-    "exlude_protocol": "ssr", //Not parsing ssr nodes
+    "exclude_protocol": "ssr", //Not parsing ssr nodes
     "config_template": "", //Customize the correct web page json configuration template link
     "Only-nodes": false //Output the complete sing-box configuration
 }
@@ -232,9 +240,9 @@ In this file, you can add subscription links and basic settings.
 
 <details>
       <summary>tag screenshot reference</summary>
-  
+
 <div align="left">
-  <img src="https://github.com/Toperlock/sing-box-subscribe/assets/86833913/b8673073-7160-429f-9ced-3eae7925036e" alt="download" width="65%" />
+  <img src="https://github.com/Toperlock/sing-box-subscribe/assets/86833913/781c5bb7-c5c5-467e-a6ae-05ff44a19973" alt="download" width="65%" />
 </div>
 
 </details>
@@ -270,7 +278,7 @@ In this file, you can add subscription links and basic settings.
 - `auto_backup`: Optional.
 > When set to true, the script will rename the currently used sing-box configuration file to `original_filename.current_time.bak` for backup purposes, in case an incorrect configuration file is generated and needs to be restored.
 
-- `exlude_protocol`: Optional.
+- `exclude_protocol`: Optional.
 > Set the protocols to exclude, separated by commas, e.g., ssr, vmess.
 
 > Sharing links using protocols in this setting will be ignored.
@@ -302,7 +310,7 @@ The template files are similar to sing-box configs, but with some new parameters
   ],
   "filter":[
     //This filter will remove nodes containing ˣ² in airport1_tag
-    {"action":"exlude","keywords":["ˣ²"],"for":["机场1"]}
+    {"action":"exclude","keywords":["ˣ²"],"for":["机场1"]}
   ]
 },
 {
@@ -316,7 +324,7 @@ The template files are similar to sing-box configs, but with some new parameters
     //If airport1_tag and airport2_tag have nodes with these names 'sg','新加坡','tw','台湾' they collectively form the netflix group
     {"action":"include","keywords":["sg|新加坡|tw|台湾"]},
     //The "for" is set to airport1_tag, which means that this rule only works on airport1_tag
-    {"action":"exlude","keywords":["ˣ²"],"for":["机场1"]}
+    {"action":"exclude","keywords":["ˣ²"],"for":["机场1"]}
     //This filter will remove nodes containing ˣ² in airport1_tag
   ]
 }

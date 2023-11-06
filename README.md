@@ -30,7 +30,15 @@ https://xxxxxxx.vercel.app/config/url=https://xxxxxxsubscribe?token=123456/&file
 
 示例：https://sing-box-subscribe.vercel.app/config/https://gist.githubusercontent.com/Toperlock/b1ca381c32820e8c79669cbbd85b68ac/raw/dafae92fbe48ff36dae6e5172caa1cfd7914cda4/gistfile1.txt/&file=https://github.com/Toperlock/sing-box-subscribe/raw/main/config_template/config_template_groups_tun.json
 
-2023.11.04更新: 可以处理两条订阅，格式为：`/config/URL_LINK_1|URL_LINK_2`，不能写 `emoji`, `tag`, `prefix`, `UA`, `file` 参数
+2023.11.04更新: 可以处理两条订阅，格式为：`/config/URL编码`，不能写 `emoji`, `tag`, `prefix`, `UA`, `file` 参数
+
+用 `|` 连接两个订阅链接后进行 [URL编码](https://www.urlencoder.org/) 放在 `config/` 后面，如图：
+
+<div align="left">
+  <img src="https://github.com/Toperlock/sing-box-subscribe/assets/86833913/5ed8e9de-3296-4dfc-ad65-2e181017829e" alt="how-to-use" width="50%" />
+</div>
+
+示例：https://sing-box-subscribe.vercel.app/config/https%3A%2F%2Fgist.githubusercontent.com%2FToperlock%2Fb1ca381c32820e8c79669cbbd85b68ac%2Fraw%2Fdafae92fbe48ff36dae6e5172caa1cfd7914cda4%2Fgistfile1.txt%7Chttps%3A%2F%2Fgist.githubusercontent.com%2FToperlock%2Ffa2fdc5f827ff7d288c23d568db75412%2Fraw%2F6c3b725da347f57b0021b806dfca5f51e1660746%2F1.yaml
 
 ### 演示视频
 
@@ -207,7 +215,7 @@ windows系统建议将命令添加到批处理程序运行。
     },
     "save_config_path": "./config.json",
     "auto_backup": false,
-    "exlude_protocol": "ssr" //排除订阅链接里ssr协议节点
+    "exclude_protocol": "ssr" //排除订阅链接里ssr协议节点
     "config_template": "", //自定义正确的网页json配置模板链接
     "Only-nodes": false //开启时，只输出节点内容(不是完整sing-box配置)
 }
@@ -234,9 +242,9 @@ windows系统建议将命令添加到批处理程序运行。
 
 <details>
       <summary>tag截图参考</summary>
-      
+   
 <div align="left">
-<img src="https://github.com/Toperlock/sing-box-subscribe/assets/86833913/b8673073-7160-429f-9ced-3eae7925036e" alt="download" width="65%" />
+<img src="https://github.com/Toperlock/sing-box-subscribe/assets/86833913/781c5bb7-c5c5-467e-a6ae-05ff44a19973" alt="download" width="65%" />
 </div>
 
 </details>
@@ -272,7 +280,7 @@ windows系统建议将命令添加到批处理程序运行。
 - `auto_backup`：非必需。
 > 设置为 true 时，脚本会将当前使用的sing-box配置文件更名为 `原文件名称.当前时间.bak` 进行备份，避免生成错误的配置文件后无法挽回。
  
-- `exlude_protocol`：非必需。
+- `exclude_protocol`：非必需。
 > 设置不解析的协议，多个使用英文逗号分隔，比如ssr,vmess。
 
 > 使用此设置中的协议的分享链接会被忽略。
@@ -304,7 +312,7 @@ windows系统建议将命令添加到批处理程序运行。
   ],
   "filter":[
     //此条过滤将会删除 机场1 中包含 ˣ² 的节点
-    {"action":"exlude","keywords":["ˣ²"],"for":["机场1"]}
+    {"action":"exclude","keywords":["ˣ²"],"for":["机场1"]}
   ]
 },
 {
@@ -318,7 +326,7 @@ windows系统建议将命令添加到批处理程序运行。
     //如果机场1，机场2有节点 sg、新加坡、tw、台湾，他们共同组成 netflix 组
     {"action":"include","keywords":["sg|新加坡|tw|台湾"]},
     //for里面设置为机场1，代表此条规则只对机场1起作用
-    {"action":"exlude","keywords":["ˣ²"],"for":["机场1"]}
+    {"action":"exclude","keywords":["ˣ²"],"for":["机场1"]}
     //执行完第二个规则后 netflix 组将机场1 中包含 ˣ² 的节点删掉
   ]
 }
@@ -331,14 +339,14 @@ windows系统建议将命令添加到批处理程序运行。
 ```json
 "filter":[
     {"action":"include","keywords":["保留关键字1|保留关键字2"]},
-    {"action":"exlude","keywords":["排除关键字1|排除关键字2"],"for":["机场1tag","机场2tag"]}
+    {"action":"exclude","keywords":["排除关键字1|排除关键字2"],"for":["机场1tag","机场2tag"]}
   ]
 ```
 - **关键字大小写敏感**
 
 - `include`：后面添加要保留的关键字，用 '|' 连接多个关键字，名称中包含这些关键字的节点都将被保留，其他节点会被删除。
 
-- `exlude`：后面添加要排除的关键字，用 '|' 连接多个关键字，名称中包含这些关键字的节点都将被删除，其他节点会被保留。
+- `exclude`：后面添加要排除的关键字，用 '|' 连接多个关键字，名称中包含这些关键字的节点都将被删除，其他节点会被保留。
 
 - `for`：非必需。设置机场 `tag`，可以多个，表示此规则只对指定的机场起作用，其他机场会忽略这个规则。
 
@@ -389,6 +397,10 @@ windows系统建议将命令添加到批处理程序运行。
 </div>
 
 </details>
+
+## Star 历史
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Toperlock/sing-box-subscribe&type=Date)](https://star-history.com/#Toperlock/sing-box-subscribe&Date)
 
 # 感谢
 - [一佬](https://github.com/xream)
